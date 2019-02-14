@@ -1,0 +1,13 @@
+
+$red:#E51C23;
+$green:#259b24;
+@mixin btn($color,$radius) {
+  width: 100%;
+  text-align: center;
+  color: $color;
+  border-radius: $radius;
+  background: transparent;
+  border: 1px solid $color;
+  color: white;
+  background: $color;
+}

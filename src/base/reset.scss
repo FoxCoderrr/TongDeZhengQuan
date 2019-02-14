@@ -1,0 +1,248 @@
+/* Element样式修改 */
+body{
+.el-form-item__label {
+    color: white;
+    font-size: 16px;
+  }
+  .el-tooltip__popper.is-light{
+    transform: translateY(10px);
+    background: #ffffe1;
+  }
+  .code_input {
+    width: calc(100% - 110px);
+  }
+  .code_div {
+    .code_btn {
+      padding: 0;
+      width: 90px;
+      display: block;
+      line-height: 38px;
+    }
+  }
+  .stock_table {
+    cursor: default;
+    .el-table .cell {
+      padding-left: 0;
+      padding-right: 6px;
+    }
+    .el-table thead {
+      color: #c0c0c0;
+    }
+    .el-table {
+      color: #c0c0c0;
+    }
+    .el-table::before,
+    .el-table__fixed-right::before,
+    .el-table__fixed::before {
+      height: 0;
+    }
+    .el-table th {
+      font-weight: normal;
+      padding: 6px 0 6px;
+      color: #c0c0c0;
+    }
+    .el-table td {
+      font-weight: 700;
+      padding: 4px 0 4px;
+    }
+    .el-table td,
+    .el-table th {
+      text-align: right;
+    }
+    .el-table th,
+    .el-table tr {
+      background: #000;
+    }
+    .el-table td,
+    .el-table th.is-leaf {
+      border: 0;
+    }
+    tr:hover td,
+    .hover-row td {
+      background: #000 !important;
+    }
+    .el-table__body-wrapper {
+      background: #000;
+    }
+    .el-table__fixed,
+    .el-table__fixed-right {
+      -webkit-box-shadow: 0px -1px 10px 0 rgba(255, 255, 255, 0.4);
+      box-shadow: 0px -1px 10px 0 rgba(255, 255, 255, 0.4);
+    }
+    .el-table .bg_white,
+    .el-table .bg_white td {
+      background: #6d6d6d !important;
+    }
+  }
+  .el-tooltip__popper {
+    padding: 4px;
+  }
+  .bs_form .el-input__inner {
+    line-height: 30px;
+    height: 30px;
+    border: 1px solid #8e8e8e;
+  }
+  .bs_form .el-input.is-active .el-input__inner,
+  .bs_form .el-input__inner:focus {
+    border-color: #409eff;
+  }
+  .bs_btn {
+    .el-button {
+      padding: 10px 0 10px;
+      width: 100px;
+    }
+    .el-button:hover {
+      opacity: 0.8;
+    }
+    .el-button:active {
+      opacity: 1;
+    }
+    .el-button:first-child {
+      background: #d9534f;
+      border-color: #d9534f;
+    }
+    .el-button:last-child {
+      background: #5cb85c;
+      border-color: #5cb85c;
+    }
+  }
+  .s_btn {
+    text-align: center;
+    .el-button:last-child {
+      background: #5770c8;
+      border-color: #5770c8;
+    }
+  }
+  .list_table {
+    .delete_td {
+      color: #5770c8;
+    }
+    .el-table::before,
+    .el-table__fixed-right::before,
+    .el-table__fixed::before {
+      height: 0;
+    }
+    .el-table th {
+      background: #e3e3e3;
+      padding: 6px 0 6px;
+    }
+    .el-table td {
+      padding: 3px 0 3px;
+    }
+    .el-table th > .cell {
+      color: #333;
+      padding: 0 5px 0;
+    }
+    .el-table td > .cell {
+      white-space: nowrap;
+      padding: 0 5px 0;
+    }
+    .el-table {
+      th,
+      td {
+        text-align: center;
+      }
+      .el-table__body tr {
+        cursor: pointer;
+      }
+      .el-table__body-wrapper {
+        &::-webkit-scrollbar {
+          width: 4px;
+          height: 6px;
+          background-color: #eee;
+          border: 1px solid #eee;
+        }
+  
+        /*定义滚动条轨道 内阴影+圆角*/
+        &::-webkit-scrollbar-track {
+          -webkit-box-shadow: inset 0 0 6px #eee;
+          background-color: #eee;
+        }
+        /*定义滑块 内阴影+圆角*/
+        &::-webkit-scrollbar-thumb {
+          -webkit-box-shadow: inset 0 0 6px #eee;
+          background-color: #ccc;
+          border-radius: 10px;
+        }
+      }
+    }
+    .first_td {
+      min-width: 80px;
+    }
+  }
+  .w_form {
+    .el-input.is-disabled .el-input__inner{
+      color: #333;
+    }
+    .el-input__inner {
+      border: 1px solid #bbb;
+    }
+    .el-input.is-active .el-input__inner,
+    .el-input__inner:focus {
+      border-color: #409eff;
+    }
+    .el-form-item__label {
+      color: #333;
+      font-size: 14px;
+    }
+    .el-input {
+      width: 280px;
+    }
+    .code_input{
+      width: 186px;
+    }
+    .code_div {
+      display: inline-block;
+      .code_btn {
+        padding: 0;
+        width: 90px;
+        display: block;
+        line-height: 32px;
+      }
+    }
+    .s_btn {
+      text-align: left;
+      .el-button:last-child {
+        width: 150px;
+        margin-left: 132px;
+      }
+      .el-button:hover{
+        opacity: 0.8;
+      }
+      .el-button:active {
+        opacity: 1;
+      }
+      .el-button[disabled]{
+        opacity: 0.8!important;
+      }
+    }
+  }
+  .w_form1 {
+    .el-form-item {
+      margin-bottom: 22px;
+    }
+    .el-input__icon {
+      line-height: 34px;
+    }
+    .el-form-item__content {
+      line-height: 34px;
+    }
+    .el-input__inner {
+      height: 34px;
+      line-height: 34px;
+    }
+    .el-form-item__label {
+      line-height: 34px;
+    }
+  }
+  .el-range-editor.el-input__inner {
+    border-color: #bbb;
+  }
+  .tool_btn{
+    .el-button{
+      height: 22px;
+      line-height: 22px;
+      margin:0 2px 0;
+    }
+  }
+}
