@@ -76,6 +76,7 @@ export default {
       this.$parent.toHome(0);
     },
     toKline(i) {
+      clearInterval(window.tline_time);
       let that = this;
       that.$store.state.kline_index = i;
       that.$store.state.klineIf = true;
@@ -129,31 +130,38 @@ export default {
     },
     time_line(short) {
       let that = this;
-      if(short==that.$store.state.self_short){
-        that
-          .$http({
-            url: "/",
-            method: "post",
-            data: {
-              nozzle: "time_sharing",
+      clearInterval(window.tline_time);
+      fun();
+      window.tline_time = setInterval(()=>{
+        fun();
+      },10000)
+      function fun(){
+        if(short==that.$store.state.self_short){
+          that
+            .$http({
+              url: "/",
+              method: "post",
+              data: {
+                nozzle: "time_sharing",
+              }
+            })
+            .then(function(res) {
+              if (res.data.code == 1) {
+                that.time_line_k(res.data.data.data, 0,res.data.data.info);
+              }
+            });
+        }else{
+          $.get(
+            "http://web.ifzq.gtimg.cn/appstock/app/minute/query",
+            {
+              _var: "min_data_" + short,
+              code: short
+            },
+            function(rawData) {
+              that.time_line_k(rawData, short,0);
             }
-          })
-          .then(function(res) {
-            if (res.data.code == 1) {
-              that.time_line_k(res.data.data.data, 0,res.data.data.info);
-            }
-          });
-      }else{
-        $.get(
-          "http://web.ifzq.gtimg.cn/appstock/app/minute/query",
-          {
-            _var: "min_data_" + short,
-            code: short
-          },
-          function(rawData) {
-            that.time_line_k(rawData, short,0);
-          }
-        );
+          );
+        }
       }
     },
 
@@ -443,7 +451,7 @@ export default {
           }
         ]
       };
-      that.myChart.clear(option, true);
+      // that.myChart.clear(option, true);
       that.myChart.setOption(option, true);
     },
     time_data(time) {

@@ -42,6 +42,7 @@
   </div>
 </template>
 <script>
+import $ from "jquery"
 import SIdentify from "../components/icode";
 export default {
   data() {

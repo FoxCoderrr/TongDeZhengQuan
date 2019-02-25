@@ -423,6 +423,7 @@ export default {
     toHome(type) {
       let that = this;
       clearInterval(that.$refs.stock.top_stock);
+      clearInterval(window.tline_time);
       clearInterval(window.chart_right);
       clearInterval(window.chart_right1);
       that.$children[1].mouseIf = false;
