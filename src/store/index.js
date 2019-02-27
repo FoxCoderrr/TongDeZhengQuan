@@ -13,7 +13,15 @@ export default new vuex.Store({
     klineIf: false,
     tlineIf: false,
     sortIf: true,
-    u_assets: {},
+    u_assets: {
+      bond:"",
+      cash:"",
+      close_profit:"",
+      market:"",
+      number:"",
+      profit:"",
+      total:""
+    },
     sort_index: 2,
     active_stock: {},
     speIf:false,

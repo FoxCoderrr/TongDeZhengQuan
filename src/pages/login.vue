@@ -189,10 +189,10 @@ export default {
       }
     },
     toReg() {
-      window.open("http://ayweb.bjfable.com/register/index.html");
-      // this.$router.push({
-      //   name: "register"
-      // });
+      // window.open("http://ayweb.bjfable.com/register/index.html");
+      this.$router.push({
+        name: "reg1"
+      });
     }
   }
 };

@@ -131,7 +131,8 @@ export default {
       size: 10,
       sum: 0,
       loading: false,
-      tableData3: []
+      tableData3: [],
+       maxx:this.$store.state.u_assets.cash
     };
   },
   mounted() {},
@@ -218,6 +219,13 @@ export default {
     that.name = "--";
     that.price = "";
     that.max = "";
+    window.max_time = setInterval(()=>{
+      if(that.price){
+        that.max = (
+                that.$store.state.u_assets.cash / that.price/100
+              ).toString().split(".")[0];
+      }
+    },2000)
   },
   methods: {
     buy(i) {
@@ -700,9 +708,9 @@ export default {
               that.code = a[0].substr(2);
               that.name = a[1];
               that.price = a[4];
-              that.max = parseFloat(
-                that.$store.state.u_assets.cash / that.price
-              ).toFixed(2);
+              that.max = (
+              that.$store.state.u_assets.cash / that.price/100
+            ).toString().split(".")[0];
             }
           });
       }
@@ -712,9 +720,9 @@ export default {
       if (v != "") {
         that.$nextTick(function() {
           that.price = v.toString().match(/\d+\.?\d{0,6}/)[0];
-          that.max = parseFloat(
-            that.$store.state.u_assets.cash / that.price
-          ).toFixed(2);
+          that.max = (
+              that.$store.state.u_assets.cash / that.price/100
+            ).toString().split(".")[0];
         });
       } else {
         that.max = "";

@@ -1,0 +1,125 @@
+html, body {
+	height: 100%;
+}
+#wrapper {
+	width: 100%;
+	/* height: 100%; */
+	margin: 0 auto;
+	max-width: 450px;
+}
+#wrapper > p {
+	font-size: 16px;
+	line-height: 40px;
+	color: #fff;
+	text-align: center;
+	background: #5770C8;
+	position: relative;
+}
+#wrapper > p > span {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 40px;
+	height: 40px;
+	background: url(images/left.png) no-repeat center center/ 25px 25px;
+}
+#wrapper .link{
+	color: rgb(150, 150, 150);
+	text-align: right;
+	padding: 0 20px 0;
+	box-sizing: border-box
+}
+.cont {
+	padding: 20px;
+}
+.input-cont {
+	width: 100%;
+	margin-bottom: 16px;
+}
+.input-cont > p {
+	line-height: 35px;
+	color: white;
+	font-size: 15px;
+}
+@media screen and (max-width: 375px) {
+	.input-cont {
+		margin-bottom: 20px;
+	}
+	.input-cont > p {
+		line-height: 30px;
+	}
+}
+@media screen and (max-width: 320px) {
+	.input-cont {
+		margin-bottom: 10px;
+	}
+	.input-cont > p {
+		line-height: 25px;
+	}
+}
+.input-cont > input,.input-cont > select{
+	display: block;
+	width: 100%;
+	line-height: 35px;
+	color: rgba(136, 136, 136, 1);
+	font-size: 14px;
+	padding-left: 10px;
+	border: 1px solid rgba(187, 187, 187, 1);
+	border-radius: 4px;
+}
+.input-cont > select{
+	background: #fff;
+	height: 37px;
+}
+.input-text {
+	display: flex;
+	justify-content: space-between;
+}
+.input-text > input {
+	width: 65%;
+	line-height: 35px;
+	color: rgba(136, 136, 136, 1);
+	padding-left: 10px;
+	font-size: 14px;
+	border: 1px solid rgba(187, 187, 187, 1);
+	border-radius: 4px;
+}
+.input-text > button {
+	display: inline-block;
+	width: 30%;
+	line-height: 35px;
+	border-radius: 4px;
+	color: rgba(87, 112, 200, 1);
+	font-size: 14px;
+	text-align: center;
+	border: 1px solid rgba(87, 112, 200, 1);
+	background: #fff;
+	cursor: pointer;
+}
+.input-text > button:disabled {
+	cursor: not-allowed;
+}
+.button {
+	display: block;
+	width: 100%;
+	line-height: 45px;
+	border-radius: 4px;
+	background-color: rgba(87, 112, 200, 1);
+	color: rgba(255, 255, 255, 1);
+	font-size: 14px;
+	text-align: center;
+	cursor: pointer;
+}
+.upLoad {
+	width: 100%;
+	border: 1px solid rgba(187, 187, 187, 1);
+	border-radius: 4px;
+	min-height: 100px;
+	background: url(images/upload.png) no-repeat center center/80px 60px;
+	background-color: #dbd9d9
+}
+.upLoad img{
+	width: 100%;
+	height: auto;
+	min-height: 100px;
+}

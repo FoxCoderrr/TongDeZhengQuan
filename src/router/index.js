@@ -16,6 +16,9 @@ import In from '@/pages/in'
 import Out from '@/pages/out'
 import Identify from '@/pages/identify'
 import Register from '@/pages/register'
+import Reg1 from '@/pages/reg1'
+import Reg2 from '@/pages/reg2'
+import Reg3 from '@/pages/reg3'
 
 Vue.use(Router)
 
@@ -26,6 +29,27 @@ export default new Router({
       name: 'login',
       components: {
         main: Login,
+      }
+    },
+    {
+      path: '/reg1',
+      name: 'reg1',
+      components: {
+        main: Reg1,
+      }
+    },
+    {
+      path: '/reg2',
+      name: 'reg2',
+      components: {
+        main: Reg2,
+      }
+    },
+    {
+      path: '/reg3',
+      name: 'reg3',
+      components: {
+        main: Reg3,
       }
     },
     {
