@@ -184,6 +184,7 @@ export default {
         var down_amplitude = Math.abs(((info[34] - yesterday) / yesterday) * 100);
       }
       var data = that.split_data(arr, yesterday);
+      console.log(data)
       that.avg = data.average[data.average.length-1];
       var max = 0;
         for (var i = 1; i < data["number"].length; i++) {

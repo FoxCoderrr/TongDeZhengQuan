@@ -2,14 +2,15 @@
   <div class="wrap">
     <div class="w_form">
       <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="100px">
-        <div class="clearfix d_item">
+        <!-- <div class="clearfix d_item">
           <span class="f_l">银行信息1：</span>
           <div class="f_r">银行信息：中国建设银行--管理员--1234567899876543211</div>
         </div>
         <div class="clearfix d_item">
           <span class="f_l">银行信息2：</span>
           <div class="f_r">银行信息：中国建设银行--管理员--1234567899876543211</div>
-        </div>
+        </div> -->
+        <div style="height:20px"></div>
         <el-form-item label="申请金额：" prop="num">
           <el-input @input="inputNum" v-model.number="ruleForm2.num" @keyup.native.enter="withdraw('ruleForm2')" placeholder="请输入申请金额"></el-input>
         </el-form-item>
@@ -55,11 +56,16 @@ export default {
             .$http({
               url: "/",
               method: "post",
-              data: {}
+              data: {
+                nozzle:"recharge",
+                token: that.$store.state.token,
+                number:that.ruleForm2.num
+              }
             })
             .then(function(res) {
               that.bool = false;
               if (res.data.code == 1) {
+                window.open(res.data.data);
                 that.$refs[formName].resetFields();
                 that.$store.dispatch('getAssets');
               }

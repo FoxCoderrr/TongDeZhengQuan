@@ -147,9 +147,12 @@ export default {
                 arr.push(v.short);
               }
               that.getMarket(arr, firstActive);
-              window.top_stock = setInterval(() => {
-                that.getMarket(arr, firstActive);
-              }, 2000);
+               if(that.$store.commit('getIfTrade')){
+                
+                 window.top_stock = setInterval(() => {
+                   that.getMarket(arr, firstActive);
+                 }, 2000);
+              }
             }
           }
         });

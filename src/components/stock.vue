@@ -53,7 +53,7 @@ import $ from "jquery";
 export default {
   data() {
     return {
-      loading:true,
+      loading: true,
       bool: false,
       page: 0,
       size: 20,
@@ -61,9 +61,29 @@ export default {
       m_top: 0,
       mouseIf: false,
       t_height: "100%",
-      tableData3: [],
-      ifSetFirst:true,
-      top_stock:"",
+      tableData3: [
+        {
+          amount: "",
+          buy: "",
+          code: "000001",
+          hand: "",
+          high: "",
+          index: "",
+          low: "",
+          name: "",
+          price: "",
+          range: "",
+          ratio: "",
+          sell: "",
+          short: "",
+          today: "",
+          updown: "",
+          updown_: "",
+          yestoday: ""
+        }
+      ],
+      ifSetFirst: true,
+      top_stock: ""
     };
   },
   mounted() {
@@ -74,13 +94,13 @@ export default {
     that.page = 0;
     that.top_stock = "";
     window.clearInterval(that.top_stock);
-    that.getList(1,1,1);
+    that.getList(1, 1, 1);
   },
   activated() {
     let that = this;
   },
   methods: {
-    getList(type,type1,firstActive,search) {
+    getList(type, type1, firstActive, search) {
       $(".el-table__body-wrapper").scrollTop(0);
       let that = this;
       window.clearInterval(that.top_stock);
@@ -96,8 +116,8 @@ export default {
       } else {
         that.page++;
       }
-      if(type1){
-        that.tableData3=[];
+      if (type1) {
+        that.tableData3 = [];
       }
       that.$parent.input_page = that.page;
       that.loading = true;
@@ -116,25 +136,28 @@ export default {
           window.clearInterval(that.top_stock);
           that.loading = false;
           if (res.data.code == 1) {
-            let arr_page=[];
-            for(let i=0;i<res.data.data.page;i++){
-              arr_page.push(i+1);
+            let arr_page = [];
+            for (let i = 0; i < res.data.data.page; i++) {
+              arr_page.push(i + 1);
             }
             that.$parent.sum = arr_page;
             if (res.data.data.data) {
               let arr = [];
               for (let v of res.data.data.data) {
-                if(v.code!=search){
+                if (v.code != search) {
                   arr.push(v.short);
-                }else{
-                  arr.unshift(v.short)
+                } else {
+                  arr.unshift(v.short);
                 }
               }
               window.clearInterval(that.top_stock);
-              that.getMarket(arr,firstActive);
-              that.top_stock = setInterval(()=>{
-                that.getMarket(arr,firstActive)
-              },2000);
+              that.getMarket(arr, firstActive);
+              if(that.$store.commit('getIfTrade')){
+                
+                that.top_stock = setInterval(() => {
+                  that.getMarket(arr, firstActive);
+                }, 2000);
+              }
             } else {
               that.bool = true;
               that.page--;
@@ -142,9 +165,9 @@ export default {
           }
         });
     },
-    getMarket(arr,firstActive) {
+    getMarket(arr, firstActive) {
       let that = this;
-      let self="";
+      let self = "";
       let list = [];
       let arr1 = [];
       for (let v of arr) {
@@ -168,7 +191,7 @@ export default {
               let obj = {};
               let a = res.data.data;
               obj.short = that.$store.state.self_short;
-              obj.index = 1+(that.page-1)*that.size;
+              obj.index = 1 + (that.page - 1) * that.size;
               obj.code = a[0].substr(2);
               obj.name = a[1];
               obj.updown_ = parseFloat((a[4] - a[3]) / a[3]).toFixed(2) + "%";
@@ -212,7 +235,7 @@ export default {
               let obj = {};
               let a = eval("v_" + arr1[i]).split("~");
               obj.short = arr1[i];
-              obj.index = Number(i) + Number(x)+(that.page-1)*that.size;
+              obj.index = Number(i) + Number(x) + (that.page - 1) * that.size;
               obj.code = a[2];
               obj.name = a[1];
               obj.updown_ = a[32] + "%";
@@ -241,7 +264,7 @@ export default {
               list.push(obj);
             }
             that.tableData3 = list;
-            if (firstActive&&that.ifSetFirst) {
+            if (firstActive && that.ifSetFirst) {
               that.$store.state.active_stock = that.tableData3[0];
               that.ifSetFirst = false;
             }
@@ -300,11 +323,13 @@ export default {
         });
     },
     rowStyle({ row, rowIndex }) {
+      if(this.$store.state.active_stock){
         if (this.$store.state.active_stock.code == row.code) {
           return "bg_white";
         } else {
           return "";
         }
+      }
     },
     cellStyle({ row, column, rowIndex, columnIndex }) {
       if (
@@ -331,14 +356,14 @@ export default {
       let that = this;
       that.$store.state.active_stock = row;
       let short0;
-      if(row.code!=that.$store.state.self_short.substr(2)){
-        short0 =(row.code.slice(0, 1) == 6) ? "sh" : "sz";
-        short0+=row.code;
-      }else{
+      if (row.code != that.$store.state.self_short.substr(2)) {
+        short0 = row.code.slice(0, 1) == 6 ? "sh" : "sz";
+        short0 += row.code;
+      } else {
         short0 = that.$store.state.self_short;
       }
-      if(that.$route.name=="buy"){
-        that.$parent.$refs.bot.getInfo(short0,0);
+      if (that.$route.name == "buy") {
+        that.$parent.$refs.bot.getInfo(short0, 0);
         that.$parent.$refs.bot.formInfo(short0);
       }
     },
@@ -353,14 +378,14 @@ export default {
       let that = this;
       that.mouseIf = true;
       let short0;
-      if(row.code!=that.$store.state.self_short.substr(2)){
-        short0 =(row.code.slice(0, 1) == 6) ? "sh" : "sz";
-        short0+=row.code;
-      }else{
+      if (row.code != that.$store.state.self_short.substr(2)) {
+        short0 = row.code.slice(0, 1) == 6 ? "sh" : "sz";
+        short0 += row.code;
+      } else {
         short0 = that.$store.state.self_short;
       }
-      if(that.$route.name=="buy"||that.$route.name=="sell"){
-        that.$parent.$refs.bot.getInfo(short0,0);
+      if (that.$route.name == "buy" || that.$route.name == "sell") {
+        that.$parent.$refs.bot.getInfo(short0, 0);
         that.$parent.$refs.bot.formInfo(short0);
       }
       that.$store.state.active_stock = row;

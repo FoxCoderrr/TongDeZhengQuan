@@ -226,9 +226,12 @@ export default {
     that.getInfo();
     clearInterval(window.spe);
     ff();
-    window.spe = setInterval(()=>{
-      ff();
-    },5000)
+     if(that.$store.commit('getIfTrade')){
+                
+       window.spe = setInterval(()=>{
+         ff();
+       },5000)
+              }
     function ff(){
       $.ajax({
             cache: true,
@@ -257,7 +260,10 @@ export default {
       if(short != that.$store.state.self_short){
         clearInterval(window.chartRight1);
         fun();
-        window.chartRight1 = setInterval(fun,60000);
+         if(that.$store.commit('getIfTrade')){
+                
+           window.chartRight1 = setInterval(fun,60000);
+              }
         function fun() {
           //解释：num=>条数  symbol=>代码
           $.ajax({
@@ -283,7 +289,10 @@ export default {
     getInfo(){
       let that = this;
       clearInterval(window.chartRight);
-      window.chartRight = setInterval(fun,2000);
+       if(that.$store.commit('getIfTrade')){
+                
+         window.chartRight = setInterval(fun,2000);
+              }
       fun();
       function fun(){
         if (that.$store.state.active_stock.short != that.$store.state.self_short) {
@@ -316,27 +325,31 @@ export default {
                 a[37] = a[37] + "万";
               }
               that.$store.state.otherArr1 = [
-                a[5],
-                a[47],
-                a[4],
-                a[48],
-                a[3],
-                a[31],
-                a[41],
-                a[32],
-                a[34],
-                "--",
-                "--",
-                a[7],
-                a[8],
-                a[39],
-                "--",
-                a[38],
-                a[44],
-                "--",
-                "--",
-                a[36],
-                a[37]
+                a[5],//今开
+                a[47],//涨停价
+                a[4],//昨收
+                a[48],//跌停价
+                a[3],//当前价
+                a[31],//涨跌额
+                a[41],//最高
+
+                a[32],//涨跌幅
+
+                a[34],//最低
+
+
+                "--",//
+                "--",//
+                a[7],//外盘
+                a[8],//内盘
+                a[39],//市盈率
+                "--",//
+                a[38],//换手率
+                a[44],//流通市值
+                "--",//
+                "--",//
+                a[36],//成交量
+                a[37]//成交额
               ];
             }
           });
@@ -357,29 +370,35 @@ export default {
                   that.$store.state.sellArr1[i].number = a[29 - i * 2];
                 }
                 for (let i in that.$store.state.buyArr1) {
-                  that.$store.state.buyArr1[i].price = a[12 + i * 2];
-                  that.$store.state.buyArr1[i].number = a[11 + i * 2];
+                  that.$store.state.buyArr1[i].price = a[20 - i * 2];
+                  that.$store.state.buyArr1[i].number = a[19 - i * 2];
                 }
                 that.$store.state.otherArr1 = [
-                  a[2],
-                  parseFloat(a[3]+a[3]*0.1).toFixed(2),
-                  a[3],
-                  parseFloat(a[3]-a[3]*0.1).toFixed(2),
-                  a[4],
-                  a[2],
-                  parseFloat(a[4]-a[3]).toFixed(2),
-                  a[5],
-                  parseFloat((a[4]-a[3])/a[3]/100).toFixed(2),
-                  "--",
-                  "--",
-                  "--",
-                  "--",
-                  "--",
-                  "--",
-                  "--",
-                  "--",
-                  "--",
-                  "--"
+                  a[2],//今开
+                (parseFloat(a[3])+parseFloat(a[3]*0.1)).toFixed(2),//涨停价
+                a[3],//昨收
+                (parseFloat(a[3])-parseFloat(a[3]*0.1)).toFixed(2),//跌停价
+                a[4],//当前价
+                (parseFloat(a[4]) - parseFloat(a[3])).toFixed(2),//涨跌额
+                a[5],//最高
+
+                ((parseFloat(a[4]-a[3]) / parseFloat(a[3])) * 100).toFixed(2),//涨跌幅
+
+                a[6],//最低
+
+
+                "--",//
+                "--",//
+                "--",//外盘
+                "--",//内盘
+                "--",//市盈率
+                "--",//
+                "--",//换手率
+                "--",//流通市值
+                "--",//
+                "--",//
+                a[9],//成交量
+                a[10]//成交额
                 ];
               }
             });

@@ -306,9 +306,13 @@ export default {
         that.loading = true;
       }
       that.page = p;
-      window.bot_stock = setInterval(()=>{
-        fun();
-      },2000)
+      fun();
+       if(that.$store.commit('getIfTrade')){
+                
+         window.bot_stock = setInterval(()=>{
+           fun();
+         },2000)
+              }
       function fun() {
         that
           .$http({
@@ -575,7 +579,10 @@ export default {
       let that = this;
       clearInterval(window.t_other);
       fun();
-      window.t_other = setInterval(fun, 2000);
+       if(that.$store.commit('getIfTrade')){
+                
+         window.t_other = setInterval(fun, 2000);
+              }
       function fun() {
         if (short != that.$store.state.self_short) {
           $.ajax({

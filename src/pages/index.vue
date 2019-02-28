@@ -324,7 +324,10 @@ export default {
       let that = this;
       let arr = ["sh000001", "sz399001", "sz399300"];
       fun();
-      window.three = setInterval(fun, 3000);
+       if(that.$store.commit('getIfTrade')){
+                
+         window.three = setInterval(fun, 3000);
+              }
       function fun() {
         $.ajax({
           url: "http://qt.gtimg.cn/q=" + arr.toString(),

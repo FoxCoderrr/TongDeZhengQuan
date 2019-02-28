@@ -99,11 +99,17 @@ export default {
           that.loading = false;
           if (res.data.code == 1) {
             that.sum = Number(res.data.data.page) * Number(that.size);
-            if (res.data.data.data) {
+            if (res.data.data.data.length) {
               let arr1=[];
+              let self={};
               for(let v of res.data.data.data){
-                arr1.push(v.short)
+                if(v.short != that.$store.state.self_short){
+                  arr1.push(v)
+                }else{
+                  self = v;
+                }
               }
+
               $.ajax({
                 cache: true,
                 url: "http://qt.gtimg.cn/q=" + arr1.toString(),
@@ -111,15 +117,28 @@ export default {
                 dataType: "script",
                 success: function() {
                   let p_arr = [];
-                  for (let i in res.data.data.data) {
-                    let a = eval("v_" + res.data.data.data[i].short).split("~");
+                  for (let i in arr1) {
+                    let a = eval("v_" + arr1[i].short).split("~");
                     p_arr.push(a[3]);
                   }
-                  for(let i in res.data.data.data){
-                    res.data.data.data[i].action = "撤单";
-                    res.data.data.data[i].price_ = p_arr[i];
+                  for(let i in arr1){
+                    arr1[i].action = "撤单";
+                    arr1[i].price_ = p_arr[i];
                   }
-                  that.tableData3 = res.data.data.data;
+                  that.tableData3 = arr1;
+                  that
+                    .$http({
+                      url: "/",
+                      method: "post",
+                      data: {
+                        nozzle: "detailed"
+                      }
+                    })
+                    .then(function(res1) {
+                      self.price_ = res1.data.data[3];
+                      self.action = "撤单";
+                      that.tableData3.push(self);
+                    })
                 }
               });
             }
