@@ -147,6 +147,7 @@ export default {
             localStorage.setItem("acc", that.phone);
             that.$store.state.token = res.data.data.token;
             sessionStorage.setItem("token", res.data.data.token);
+            fun();
             window.assets = setInterval(()=>{
               fun();
             },3000)
